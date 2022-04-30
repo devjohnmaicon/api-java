@@ -1,6 +1,5 @@
 package com.api.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,27 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private List<User> users = new ArrayList<>();
-
     @Autowired // Disponibiliza a utilização do Repositorio para a classe
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
     public User user(@PathVariable("id") Long id) {
 
-        Optional<User> userFind = users.stream().filter((user) -> user.getId() == id).findFirst();
+        Optional<User> userFind = this.userRepository.findById(id);
 
-        if (userFind.isPresent()) {
-            return userFind.get();
+        if (!userFind.isPresent()) {
+            return null;
         }
 
-        return null;
+        return userFind.get();
     }
 
     @GetMapping("/list")
     public List<User> list() {
 
-        return users;
+        return this.userRepository.findAll();
+    }
+
+    @GetMapping("/list/{id}")
+    public List<User> listMoreThan(@PathVariable("id") Long id) {
+
+        // return this.userRepository.findAllMoreThan(id); Method with Query
+
+        // Method for search with id
+        return this.userRepository.findByIdGreaterThan(id);
+    }
+
+    @GetMapping("/findByName/{name}")
+    public List<User> findByName(@PathVariable("name") String name) {
+
+        // return this.userRepository.findByName(name);
+
+        return this.userRepository.findByNameIgnoreCase(name);
     }
 
     @PostMapping("/")
