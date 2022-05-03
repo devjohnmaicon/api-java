@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired // Disponibiliza a utilização do Repositorio para a classe
+/* Disponibiliza a utilização do Repositorio para a classe */
+    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
