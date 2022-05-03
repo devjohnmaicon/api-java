@@ -23,10 +23,10 @@ public class ParkingSpotModel {
     private String responsibleName;
 
     @Column(nullable = false, length = 30)
-    private String apartment;
+    private String block;
 
     @Column(nullable = false, length = 30)
-    private String block;
+    private String apartment;
 
     @Column(nullable = false, unique = true)
     private String parkingSpotNumber;

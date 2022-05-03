@@ -12,10 +12,10 @@ public class ParkingSpotDTO {
     private String responsibleName;
 
     @NotBlank
-    private String apartment;
+    private String block;
 
     @NotBlank
-    private String block;
+    private String apartment;
 
     @NotBlank
     private String licensePlateCar;
