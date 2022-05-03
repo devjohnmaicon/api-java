@@ -2,7 +2,12 @@ package com.api.Services;
 
 import com.api.models.ParkingSpotModel;
 import com.api.repositories.ParkingSpotRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -25,4 +30,8 @@ public class ParkingSpotService {
 
     }
 
+    // public Page<ParkingSpotModel> findAll(Pageable pageable) {
+    public List<ParkingSpotModel> findAll() {
+        return parkingSpotRepository.findAll();
+    }
 }
