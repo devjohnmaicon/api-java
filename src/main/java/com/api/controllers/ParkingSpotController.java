@@ -19,7 +19,6 @@ import java.time.ZoneId;
 @RequestMapping("/parking-spot")
 public class ParkingSpotController {
 
-
     final ParkingSpotService parkingSpotService;
 
     public ParkingSpotController(ParkingSpotService parkingSpotService) {
@@ -28,23 +27,16 @@ public class ParkingSpotController {
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody @Valid ParkingSpotDTO parkingSpotDTO) {
-        //    um ap tem uma vaga
-
         try {
-            if (parkingSpotService.existsByApartmentAndBlock(parkingSpotDTO.getApartment(), parkingSpotDTO.getBlock())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: Apartamento já cadastrado!");
+
+            if (parkingSpotService.existsByApartmentAndBlock(parkingSpotDTO.getApartment(),
+                    parkingSpotDTO.getBlock())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Apartamento já cadastrado!");
             }
 
             var parkingSpotModel = new ParkingSpotModel();
-//            BeanUtils.copyProperties(parkingSpotDTO, parkingSpotModel);
+            BeanUtils.copyProperties(parkingSpotDTO, parkingSpotModel);
 
-            parkingSpotModel.setBlock(parkingSpotDTO.getBlock());
-            parkingSpotModel.setApartment(parkingSpotDTO.getApartment());
-            parkingSpotModel.setResponsibleName(parkingSpotDTO.getResponsibleName());
-            parkingSpotModel.setLicensePlateCar(parkingSpotDTO.getLicensePlateCar());
-            parkingSpotModel.setBrandCar(parkingSpotDTO.getBrandCar());
-            parkingSpotModel.setModelCar(parkingSpotDTO.getModelCar());
-            parkingSpotModel.setColorCar(parkingSpotDTO.getColorCar());
             parkingSpotModel.setParkingSpotNumber(parkingSpotDTO.getBlock() + parkingSpotDTO.getApartment());
             parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 

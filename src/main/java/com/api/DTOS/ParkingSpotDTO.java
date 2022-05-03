@@ -2,76 +2,31 @@ package com.api.DTOS;
 
 import javax.validation.constraints.*;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ParkingSpotDTO {
     @NotBlank
-    private String licensePlateCar;
-    @NotBlank
-    private String brandCar;
-    @NotBlank
-    private String modelCar;
-    @NotBlank
-    private String colorCar;
-    @NotBlank
     private String responsibleName;
+
     @NotBlank
     private String apartment;
+
     @NotBlank
     private String block;
 
-    //getters and setters
-    public String getLicensePlateCar() {
-        return licensePlateCar;
-    }
+    @NotBlank
+    private String licensePlateCar;
 
-    public void setLicensePlateCar(String licensePlateCar) {
-        this.licensePlateCar = licensePlateCar;
-    }
+    @NotBlank
+    private String modelCar;
 
-    public String getBrandCar() {
-        return brandCar;
-    }
+    @NotBlank
+    private String brandCar;
 
-    public void setBrandCar(String brandCar) {
-        this.brandCar = brandCar;
-    }
+    @NotBlank
+    private String colorCar;
 
-    public String getModelCar() {
-        return modelCar;
-    }
-
-    public void setModelCar(String modelCar) {
-        this.modelCar = modelCar;
-    }
-
-    public String getColorCar() {
-        return colorCar;
-    }
-
-    public void setColorCar(String colorCar) {
-        this.colorCar = colorCar;
-    }
-
-    public String getResponsibleName() {
-        return responsibleName;
-    }
-
-    public void setResponsibleName(String responsibleName) {
-        this.responsibleName = responsibleName;
-    }
-
-    public String getApartment() {
-        return apartment;
-    }
-
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
-    }
-
-    public String getBlock() {
-        return block;
-    }
-
-    public void setBlock(String block) {
-        this.block = block;
-    }
 }
