@@ -46,6 +46,7 @@ public class ParkingSpotController {
             }
 
             var parkingSpotModel = new ParkingSpotModel();
+
             BeanUtils.copyProperties(parkingSpotDTO, parkingSpotModel);
 
             parkingSpotModel.setParkingSpotNumber(parkingSpotDTO.getBlock() + parkingSpotDTO.getApartment());
@@ -59,9 +60,9 @@ public class ParkingSpotController {
     }
 
     @GetMapping
-    // pagi(10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
-    public ResponseEntity<Object> getAllParkingSpots() {
+    public ResponseEntity<Object> getAllParkingSpots(
+            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll());
     }
 
