@@ -16,33 +16,37 @@ import javax.transaction.Transactional;
 @Service
 public class ParkingSpotService {
 
-    final ParkingSpotRepository parkingSpotRepository;
+   final ParkingSpotRepository parkingSpotRepository;
 
-    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {
-        this.parkingSpotRepository = parkingSpotRepository;
-    }
+   public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {
+      this.parkingSpotRepository = parkingSpotRepository;
+   }
 
-    @Transactional
-    public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
-        return parkingSpotRepository.save(parkingSpotModel);
-    }
+   @Transactional
+   public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
 
-    public boolean existsByApartmentAndBlock(String apartment, String block) {
-        return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
+      if (existsByApartmentAndBlock(parkingSpotModel.getApartment(), parkingSpotModel.getBlock())) {
+         throw new RuntimeException("'Error': Já cadastrado!");
+      }
 
-    }
+      return parkingSpotRepository.save(parkingSpotModel);
+   }
 
-    public Page<ParkingSpotModel> findAll(Pageable pageable) {
-        return parkingSpotRepository.findAll(pageable);
-    }
+   public boolean existsByApartmentAndBlock(String apartment, String block) {
+      return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
+   }
 
-    public Optional<ParkingSpotModel> findById(UUID id) {
-        return parkingSpotRepository.findById(id);
-    }
+   public Page<ParkingSpotModel> findAll(Pageable pageable) {
+      return parkingSpotRepository.findAll(pageable);
+   }
 
-    @Transactional
-    public void delete(ParkingSpotModel parkingSpotModel) {
-        parkingSpotRepository.delete(parkingSpotModel);
-    }
+   public Optional<ParkingSpotModel> findById(UUID id) {
+      return parkingSpotRepository.findById(id);
+   }
+
+   @Transactional
+   public void delete(ParkingSpotModel parkingSpotModel) {
+      parkingSpotRepository.delete(parkingSpotModel);
+   }
 
 }
